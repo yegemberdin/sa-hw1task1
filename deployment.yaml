@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw1yegemberdi
+  labels:
+    app: hw1yegemberdi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw1yegemberdi
+  template:
+    metadata:
+      labels:
+        app: hw1yegemberdi
+    spec:
+      containers:
+      - name: hw1yegemberdi
+        image: yegemberdin/hw1yegemberdi
+        livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 80
+            periodSeconds: 10
+        readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 80
+            periodSeconds: 10
